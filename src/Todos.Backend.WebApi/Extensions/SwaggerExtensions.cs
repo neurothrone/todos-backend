@@ -10,9 +10,9 @@ public static class SwaggerExtensions
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Kliva API",
+                Title = "Todos API",
                 Version = "v1",
-                Description = "API for Kliva application"
+                Description = "API for Todos application"
             });
 
             // Add JWT Authentication
