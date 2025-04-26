@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Kliva.Backend.WebApi.Services;
 using System.Security.Claims;
+using Todos.Backend.WebApi.Services;
 
-namespace Kliva.Backend.WebApi.Extensions;
+namespace Todos.Backend.WebApi.Extensions;
 
 public static class AuthenticationExtensions
 {

@@ -1,8 +1,8 @@
-using Kliva.Backend.WebApi.Models;
-using Kliva.Backend.WebApi.Services;
 using System.Security.Claims;
+using Todos.Backend.WebApi.Models;
+using Todos.Backend.WebApi.Services;
 
-namespace Kliva.Backend.WebApi.Endpoints.Todo;
+namespace Todos.Backend.WebApi.Endpoints.Todo;
 
 /// <summary>
 /// Endpoint mapping for Todo API routes

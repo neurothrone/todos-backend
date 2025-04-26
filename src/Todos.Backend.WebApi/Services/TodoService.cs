@@ -1,7 +1,7 @@
 using Google.Cloud.Firestore;
-using Kliva.Backend.WebApi.Models;
+using Todos.Backend.WebApi.Models;
 
-namespace Kliva.Backend.WebApi.Services;
+namespace Todos.Backend.WebApi.Services;
 
 public interface ITodoService
 {

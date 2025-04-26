@@ -1,4 +1,4 @@
-namespace Kliva.Backend.WebApi.Models;
+namespace Todos.Backend.WebApi.Models;
 
 /// <summary>
 /// Represents the result of an operation with success or failure

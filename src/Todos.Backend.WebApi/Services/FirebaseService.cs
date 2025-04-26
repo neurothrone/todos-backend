@@ -3,7 +3,7 @@ using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 using Google.Cloud.Firestore;
 
-namespace Kliva.Backend.WebApi.Services;
+namespace Todos.Backend.WebApi.Services;
 
 public interface IFirebaseService
 {

@@ -1,7 +1,7 @@
-using Kliva.Backend.WebApi.Endpoints.Auth;
-using Kliva.Backend.WebApi.Endpoints.Todo;
-using Kliva.Backend.WebApi.Extensions;
-using Kliva.Backend.WebApi.Services;
+using Todos.Backend.WebApi.Endpoints.Auth;
+using Todos.Backend.WebApi.Endpoints.Todo;
+using Todos.Backend.WebApi.Extensions;
+using Todos.Backend.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

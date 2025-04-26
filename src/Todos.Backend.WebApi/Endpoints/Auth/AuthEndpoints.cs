@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.IO;
 
-namespace Kliva.Backend.WebApi.Endpoints.Auth;
+namespace Todos.Backend.WebApi.Endpoints.Auth;
 
 /// <summary>
 /// Endpoint mapping for authentication-related API routes

@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace Kliva.Backend.WebApi.Extensions;
+namespace Todos.Backend.WebApi.Extensions;
 
 public static class SwaggerExtensions
 {

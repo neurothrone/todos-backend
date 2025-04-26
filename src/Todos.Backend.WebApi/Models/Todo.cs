@@ -1,6 +1,6 @@
 using Google.Cloud.Firestore;
 
-namespace Kliva.Backend.WebApi.Models;
+namespace Todos.Backend.WebApi.Models;
 
 [FirestoreData]
 public class Todo
