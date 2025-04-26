@@ -78,7 +78,7 @@ public static class TodoHandlers
     /// Creates a new todo
     /// </summary>
     public static async Task<IResult> CreateTodoAsync(
-        CreateTodoDto todoDto, 
+        CreateTodoDto todoInputDto, 
         ClaimsPrincipal user, 
         ITodoService todoService)
     {
@@ -86,7 +86,7 @@ public static class TodoHandlers
         if (string.IsNullOrEmpty(userId))
             return TypedResults.Unauthorized();
 
-        var result = await todoService.CreateTodoAsync(userId, todoDto);
+        var result = await todoService.CreateTodoAsync(userId, todoInputDto);
         return result.Match<IResult>(
             onSuccess: todo => TypedResults.Created($"/api/v1/todos/{todo.Id}", todo),
             onFailure: TypedResults.BadRequest
@@ -98,7 +98,7 @@ public static class TodoHandlers
     /// </summary>
     public static async Task<IResult> UpdateTodoAsync(
         string id, 
-        TodoDto todoDto, 
+        UpdateTodoDto updateTodoDto, 
         ClaimsPrincipal user, 
         ITodoService todoService)
     {
@@ -106,7 +106,7 @@ public static class TodoHandlers
         if (string.IsNullOrEmpty(userId))
             return TypedResults.Unauthorized();
 
-        var result = await todoService.UpdateTodoAsync(userId, id, todoDto);
+        var result = await todoService.UpdateTodoAsync(userId, id, updateTodoDto);
         return result.Match<IResult>(
             onSuccess: TypedResults.Ok,
             onFailure: error => error == "Todo not found" 

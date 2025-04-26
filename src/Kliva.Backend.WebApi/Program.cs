@@ -5,28 +5,47 @@ using Kliva.Backend.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Set environment variable for Firebase credentials
+var credentialPath = builder.Configuration["Firebase:CredentialPath"];
+if (!string.IsNullOrEmpty(credentialPath) && !Path.IsPathRooted(credentialPath))
+{
+    // Make the path absolute if it's relative
+    var fullPath = Path.Combine(builder.Environment.ContentRootPath, credentialPath);
+
+    // Set the environment variable
+    Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", fullPath);
+}
+
 ConfigureServices(builder.Services, builder.Configuration, builder.Environment);
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline
 ConfigureMiddleware(app);
 
 app.Run();
 
-// Service configuration
 void ConfigureServices(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
 {
-    // CORS
     services.AddCors(options =>
     {
-        options.AddPolicy("AllowLocalhost3000", policyBuilder =>
+        options.AddPolicy("AllowFrontend", policyBuilder =>
         {
-            policyBuilder.WithOrigins("http://localhost:3000") // Frontend URL
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+            if (environment.IsDevelopment())
+            {
+                // In development, allow any origin for easier testing
+                policyBuilder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }
+            else
+            {
+                // In production, restrict to specific origins
+                policyBuilder
+                    .WithOrigins(configuration.GetValue<string>("Frontend:Url") ??
+                                 throw new Exception("Frontend URL is not configured"))
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }
         });
     });
 
@@ -43,11 +62,10 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddScoped<ITodoService, TodoService>();
 }
 
-// Middleware configuration
 void ConfigureMiddleware(WebApplication app)
 {
     // CORS must be first in the pipeline
-    app.UseCors("AllowLocalhost3000");
+    app.UseCors("AllowFrontend");
 
     if (app.Environment.IsDevelopment())
     {

@@ -14,42 +14,63 @@ public interface IFirebaseService
 public class FirebaseService : IFirebaseService
 {
     private readonly FirestoreDb _firestoreDb;
+    private readonly ILogger<FirebaseService> _logger;
     
-    public FirebaseService(IConfiguration configuration)
+    public FirebaseService(IConfiguration configuration, ILogger<FirebaseService> logger)
     {
-        // Initialize Firebase Admin SDK if not already initialized
-        if (FirebaseApp.DefaultInstance == null)
+        _logger = logger;
+        
+        try
         {
-            var projectId = configuration["Firebase:ProjectId"];
-            var credentialPath = configuration["Firebase:CredentialPath"];
-            
-            if (string.IsNullOrEmpty(projectId))
-                throw new InvalidOperationException("Firebase ProjectId is not configured");
-                
-            if (string.IsNullOrEmpty(credentialPath))
-                throw new InvalidOperationException("Firebase CredentialPath is not configured");
-
-            // Initialize Firebase Admin SDK with service account credentials
-            FirebaseApp.Create(new AppOptions
+            // Initialize Firebase Admin SDK if not already initialized
+            if (FirebaseApp.DefaultInstance == null)
             {
-                Credential = GoogleCredential.FromFile(credentialPath),
-                ProjectId = projectId
-            });
-            
-            // Initialize Firestore
-            _firestoreDb = FirestoreDb.Create(projectId);
+                var projectId = configuration["Firebase:ProjectId"];
+                
+                if (string.IsNullOrEmpty(projectId))
+                    throw new InvalidOperationException("Firebase ProjectId is not configured");
+
+                // NOTE: This will use the GOOGLE_APPLICATION_CREDENTIALS environment variable 
+                // which was set in Program.cs
+                var credential = GoogleCredential.GetApplicationDefault();
+                
+                // Initialize Firebase Admin SDK with service account credentials
+                FirebaseApp.Create(new AppOptions
+                {
+                    Credential = credential,
+                    ProjectId = projectId
+                });
+                
+                // Initialize Firestore
+                _firestoreDb = FirestoreDb.Create(projectId);
+                
+                _logger.LogInformation("Firebase initialized successfully with project ID: {ProjectId}", projectId);
+            }
+            else
+            {
+                // Get the Firestore DB from the existing Firebase instance
+                var projectId = configuration["Firebase:ProjectId"];
+                _firestoreDb = FirestoreDb.Create(projectId);
+            }
         }
-        else
+        catch (Exception ex)
         {
-            // Get the Firestore DB from the existing Firebase instance
-            var projectId = configuration["Firebase:ProjectId"];
-            _firestoreDb = FirestoreDb.Create(projectId);
+            _logger.LogError(ex, "Failed to initialize Firebase");
+            throw;
         }
     }
 
     public async Task<FirebaseToken> VerifyIdTokenAsync(string idToken)
     {
-        return await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+        try
+        {
+            return await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to verify Firebase ID token");
+            throw;
+        }
     }
 
     public FirestoreDb GetFirestoreDb()
