@@ -13,9 +13,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseStaticFiles();
 app.MapGet("/", context =>
 {
