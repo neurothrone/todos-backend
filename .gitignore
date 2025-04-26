@@ -7,6 +7,7 @@
 appsettings.json
 firebase-credentials.json
 requests.http
+auth.html
 
 # dotenv files
 .env
