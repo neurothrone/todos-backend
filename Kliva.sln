@@ -1,8 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kliva.Backend.WebApi", "Kliva.Backend.WebApi\Kliva.Backend.WebApi.csproj", "{E7716063-67F6-4B53-AA04-DC390BC0C329}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7716063-67F6-4B53-AA04-DC390BC0C329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7716063-67F6-4B53-AA04-DC390BC0C329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7716063-67F6-4B53-AA04-DC390BC0C329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7716063-67F6-4B53-AA04-DC390BC0C329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
