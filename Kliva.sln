@@ -5,6 +5,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0953A06-6F24-4EAA-96D3-149B05379344}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
+		pr-build-validation.yml = .github/workflows/pr-build-validation.yml
 	EndProjectSection
 EndProject
 Global
