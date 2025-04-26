@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kliva.Backend.WebApi", "Kliva.Backend.WebApi\Kliva.Backend.WebApi.csproj", "{E7716063-67F6-4B53-AA04-DC390BC0C329}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kliva.Backend.WebApi", "src/Kliva.Backend.WebApi\Kliva.Backend.WebApi.csproj", "{E7716063-67F6-4B53-AA04-DC390BC0C329}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0953A06-6F24-4EAA-96D3-149B05379344}"
 	ProjectSection(SolutionItems) = preProject
