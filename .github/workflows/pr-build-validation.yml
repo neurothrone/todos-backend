@@ -23,10 +23,10 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore dependencies
-        run: dotnet restore Kliva.sln
+        run: dotnet restore Todos.sln
 
       - name: Build solution
-        run: dotnet build Kliva.sln --no-restore --configuration Release
+        run: dotnet build Todos.sln --no-restore --configuration Release
 
 #      - name: Run tests
-#        run: dotnet test tests/Kliva.Backend.Tests/Kliva.Tests.csproj --no-build --configuration Release --verbosity normal
+#        run: dotnet test tests/Todos.Backend.Tests/Todos.Tests.csproj --no-build --configuration Release --verbosity normal
