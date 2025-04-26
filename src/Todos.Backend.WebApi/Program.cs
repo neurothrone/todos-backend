@@ -62,31 +62,31 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     services.AddScoped<ITodoService, TodoService>();
 }
 
-void ConfigureMiddleware(WebApplication app)
+void ConfigureMiddleware(WebApplication webApp)
 {
     // CORS must be first in the pipeline
-    app.UseCors("AllowFrontend");
+    webApp.UseCors("AllowFrontend");
 
-    if (app.Environment.IsDevelopment())
+    if (webApp.Environment.IsDevelopment())
     {
-        app.UseSwagger();
-        app.UseSwaggerUI();
+        webApp.UseSwagger();
+        webApp.UseSwaggerUI();
     }
 
     // Security middleware
-    app.UseHttpsRedirection();
-    app.UseAuthentication();
-    app.UseAuthorization();
+    webApp.UseHttpsRedirection();
+    webApp.UseAuthentication();
+    webApp.UseAuthorization();
 
     // Static files
-    app.UseStaticFiles();
-    app.MapGet("/", context =>
+    webApp.UseStaticFiles();
+    webApp.MapGet("/", context =>
     {
         context.Response.Redirect("/index.html");
         return Task.CompletedTask;
     });
 
     // API endpoints
-    app.MapAuthEndpoints();
-    app.MapTodoEndpoints();
+    webApp.MapAuthEndpoints();
+    webApp.MapTodoEndpoints();
 }
